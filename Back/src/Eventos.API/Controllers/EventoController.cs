@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Eventos.API.Data;
 using Eventos.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,26 +13,25 @@ namespace Eventos.API.Controllers
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
     {
-        public EventoController()
-        {
 
+        private readonly DataContext _context;
+        public EventoController(DataContext context)
+        {
+            _context = context;
         }
 
         [HttpGet]
         public IEnumerable<Evento> Get()
         {
-            return new Evento[]{
-                new Evento() {
-                    eventoId = 1,
-                    tema = "Angular e .NEt",
-                    local = "CG",
-                    qtdPessoas = 250,
-                    lote = "1",
-                    dataEvento = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-                    imagemURL = "foto.png"
-                }
-            };
+            return _context.Eventos;
         }
+
+        [HttpGet("{id}")]
+        public Evento GetById(int id)
+        {
+            return _context.Eventos.FirstOrDefault(evento => evento.eventoId == id);
+        }
+
 
         [HttpPost]
         public string Post()
