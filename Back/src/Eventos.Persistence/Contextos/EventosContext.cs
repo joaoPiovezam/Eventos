@@ -18,7 +18,17 @@ namespace Eventos.Persistence
         
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.Entity<PalestranteEvento>()
-                .HasKey(Persistence => new{PE.eventoId, PE.palestranteId});
+                .HasKey(Persistence => new{Persistence.eventoId, Persistence.palestranteId});
+            
+            modelBuilder.Entity<Evento>()
+                .HasMany(e => e.redes)
+                .WithOne(r => r.Evento)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Palestrante>()
+                .HasMany(p => p.RedesSociais)
+                .WithOne(r => r.palestrante)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

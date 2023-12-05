@@ -7,7 +7,7 @@ namespace Eventos.Domain
 {
     public class Evento
     {
-        public int Id{get; set;}
+        public int id{get; set;}
         public string local {get; set;}
         public DateTime? dataEvento {get; set;}
         public string tema {get; set;}

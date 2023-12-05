@@ -14,7 +14,6 @@ namespace Eventos.Domain
         public string telefone {get; set;}
         public string email {get; set;}
         public IEnumerable<RedeSocial> RedesSociais {get; set;}
-        public IEnumerable<RedeSocial> RedesSociais {get; set;}
         public IEnumerable<PalestranteEvento> palestrantesEventos {get; set;}
 
     }
